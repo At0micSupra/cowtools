@@ -16,12 +16,14 @@ Goals:
 #include <vector>
 #include <iostream>
 
+using namespace std; // i am harmful
+
 // cowpaths for homebrew, linux, macports
-char* cowPaths[] = {"/usr/local/opt/cowsay/share/cows", "/usr/share/cowsay/cows", "/opt/local/share/cowsay/cows"};
+const char* cowPaths[] = {"/usr/local/opt/cowsay/share/cows", "/usr/share/cowsay/cows", "/opt/local/share/cowsay/cows"};
 int cowPathsCount = 3;
 
-std::vector<std::string> getFriends(DIR* cowdir) {
-	std::vector<std::string> friends;
+vector<string> getFriends(DIR* cowdir) {
+	vector<string> friends;
 	struct dirent *entry;
 	while((entry = readdir(cowdir)) != NULL) {
 		friends.push_back(entry->d_name);
@@ -30,21 +32,21 @@ std::vector<std::string> getFriends(DIR* cowdir) {
 	return friends;
 }
 
-std::vector<std::string> getCows() {
+vectorstring> getCows() {
 	DIR *cowdir;
 	for(int i = 0; i < cowPathsCount; i++) {
 		if((cowdir = opendir(cowPaths[i])) != NULL) {
 			return getFriends(cowdir);
 		}
 	}
-	std::cout << "Error: couldn't find a valid cowpath!" << std::endl;
+	cout << "Error: couldn't find a valid cowpath!" << endl;
 	exit(1);
 }
 
 
 int main(int argc, char *argv[]) {
 	auto friends = getCows();
-	for(std::string i : friends) {
-		std::cout << i << std::endl;
+	for(string i : friends) {
+		cout << i << endl;
 	}
 }
