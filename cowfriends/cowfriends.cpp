@@ -69,7 +69,19 @@ void say(string f, string text) {
 
 int main(int argc, char *argv[]) {
 	auto friends = getCows();
+	string text = "";
+	if(argc <= 1) {
+		// need to get stdin for this
+	} else {
+		for(int i = 1; i < argc; i++) {
+			text.append(argv[i]);
+			if(i != argc-1) {
+				text.append(" ");
+			}
+			
+		}
+	}
 	for(string i : friends) {
-		say(i, "hello");
+		say(i, text);
 	}
 }
