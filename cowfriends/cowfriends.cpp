@@ -15,6 +15,7 @@ Goals:
 #include <string>
 #include <vector>
 #include <iostream>
+#include <stdlib.h>
 
 using namespace std; // i am harmful
 
@@ -43,7 +44,7 @@ vector<string> getFriends(DIR* cowdir) {
 		}
 		
 	}
-	closedir (cowdir);
+	closedir(cowdir);
 	return friends;
 }
 
@@ -58,10 +59,17 @@ vector<string> getCows() {
 	exit(1);
 }
 
+void say(string f, string text) {
+	std::string cmd = "cowsay -f ";
+	cmd.append(f);
+	cmd.append(" ");
+	cmd.append(text);
+	system(cmd.c_str());
+}
 
 int main(int argc, char *argv[]) {
 	auto friends = getCows();
 	for(string i : friends) {
-		cout << i << endl;
+		say(i, "hello");
 	}
 }
