@@ -62,8 +62,9 @@ vector<string> getCows() {
 void say(string f, string text) {
 	std::string cmd = "cowsay -f ";
 	cmd.append(f);
-	cmd.append(" ");
+	cmd.append(" \"");
 	cmd.append(text);
+        cmd.append("\"");
 	system(cmd.c_str());
 }
 
@@ -71,7 +72,11 @@ int main(int argc, char *argv[]) {
 	auto friends = getCows();
 	string text = "";
 	if(argc <= 1) {
-		// need to get stdin for this
+		string buffer;
+		while(getline(cin, buffer)) {
+			text.append(buffer);
+			text.append("\n");
+		}
 	} else {
 		for(int i = 1; i < argc; i++) {
 			text.append(argv[i]);
